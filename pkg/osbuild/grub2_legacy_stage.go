@@ -33,6 +33,7 @@ func (d GRUB2FSDesc) validate() error {
 
 	count := len(have)
 	if count == 0 {
+		// is this ever zero?
 		return fmt.Errorf("need `device`, `label`, or `uuid`")
 	}
 

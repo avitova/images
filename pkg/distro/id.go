@@ -19,9 +19,9 @@ type ID struct {
 func (id ID) VersionString() string {
 	if id.MinorVersion == -1 {
 		return fmt.Sprintf("%d", id.MajorVersion)
-	} else {
-		return fmt.Sprintf("%d.%d", id.MajorVersion, id.MinorVersion)
 	}
+
+	return fmt.Sprintf("%d.%d", id.MajorVersion, id.MinorVersion)
 }
 
 func (id ID) String() string {

@@ -369,7 +369,7 @@ func doRunExec(a *awscloud.AWS, command []string, flags *pflag.FlagSet, res *res
 	// and construct remote command
 	// NOTE: this wont work with directories or with multiple args in different
 	// paths that share the same basename - it's very limited
-	remoteCommand := make([]string, len(command))
+	remoteCommand := make([]string, len(command)) // idk is this safe?
 	for idx := range command {
 		arg := command[idx]
 		if isFile(arg) {

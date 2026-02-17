@@ -774,6 +774,7 @@ func (pt *PartitionTable) ensureLVM(defaultFS string) error {
 		rootPath = entityPath(pt, "/")
 	}
 
+	// is this safe?
 	parent := rootPath[1] // NB: entityPath has reversed order
 
 	if _, ok := parent.(*LVMLogicalVolume); ok {
