@@ -21,9 +21,9 @@ var (
 func BuildVersion() string {
 	if GitRev != "undefined" {
 		return fmt.Sprintf("git-rev:%s", GitRev)
-	} else if RpmVersion != "undefined" {
-		return fmt.Sprintf("NEVRA:%s", RpmVersion)
-	} else {
-		return "devel"
 	}
+	if RpmVersion != "undefined" {
+		return fmt.Sprintf("NEVRA:%s", RpmVersion)
+	}
+	return "devel"
 }

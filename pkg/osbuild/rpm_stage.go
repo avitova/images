@@ -128,7 +128,9 @@ type RPMPackageMetadata struct {
 func (pkgmd RPMPackageMetadata) Signature() *string {
 	if pkgmd.SigGPG != "" {
 		return &pkgmd.SigGPG
-	} else if pkgmd.SigPGP != "" {
+	}
+
+	if pkgmd.SigPGP != "" {
 		return &pkgmd.SigPGP
 	}
 	return nil

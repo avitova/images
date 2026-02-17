@@ -272,7 +272,9 @@ func (reg *Registry) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	if len(paths) == 1 {
 		w.WriteHeader(200)
 		return
-	} else if len(paths) < 4 {
+	}
+
+	if len(paths) < 4 {
 		http.NotFound(w, req)
 		return
 	}

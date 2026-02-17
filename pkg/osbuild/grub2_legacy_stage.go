@@ -34,7 +34,9 @@ func (d GRUB2FSDesc) validate() error {
 	count := len(have)
 	if count == 0 {
 		return fmt.Errorf("need `device`, `label`, or `uuid`")
-	} else if count > 1 {
+	}
+
+	if count > 1 {
 		return fmt.Errorf("must only specify one of %s", strings.Join(have, ", "))
 	}
 

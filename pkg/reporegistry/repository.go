@@ -39,7 +39,9 @@ func loadAllRepositoriesFromFS(confPaths []fs.FS) (rpmmd.DistrosRepoConfigs, err
 		fileEntries, err := fs.ReadDir(confPath, ".")
 		if os.IsNotExist(err) {
 			continue
-		} else if err != nil {
+		}
+
+		if err != nil {
 			return nil, err
 		}
 
@@ -109,11 +111,13 @@ func LoadRepositories(confPaths []string, distro string) (map[string][]rpmmd.Rep
 			repoConfigs, err = rpmmd.LoadRepositoriesFromFile(filepath.Join(confPath, path))
 			if os.IsNotExist(err) {
 				continue
-			} else if err != nil {
-				return nil, err
-			} else {
-				break
 			}
+
+			if err != nil {
+				return nil, err
+			}
+
+			break
 		}
 
 		// Found the distro repository configs in the current path

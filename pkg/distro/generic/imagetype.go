@@ -153,9 +153,11 @@ func (t *imageType) Exports() []string {
 func (t *imageType) BootMode() platform.BootMode {
 	if t.platform.GetUEFIVendor() != "" && t.platform.GetBIOSPlatform() != "" {
 		return platform.BOOT_HYBRID
-	} else if t.platform.GetUEFIVendor() != "" {
+	}
+	if t.platform.GetUEFIVendor() != "" {
 		return platform.BOOT_UEFI
-	} else if t.platform.GetBIOSPlatform() != "" || t.platform.GetZiplSupport() {
+	}
+	if t.platform.GetBIOSPlatform() != "" || t.platform.GetZiplSupport() {
 		return platform.BOOT_LEGACY
 	}
 	return platform.BOOT_NONE
