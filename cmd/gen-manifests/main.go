@@ -143,6 +143,30 @@ func (bc BuildConfigs) Get(distro, arch, imageType string) []*buildconfig.BuildC
 	return configs
 }
 
+func (bc BuildConfigs) Get2(distro, arch, imageType string) []*buildconfig.BuildConfig {
+	// maybe this is better?
+	configs := make([]*buildconfig.BuildConfig, 0)
+	for distroName, distroCfgs := range bc.confMap {
+		distroGlob := glob.MustCompile(distroName)
+		if !distroGlob.Match(distro) {
+			continue
+		}
+		for archName, distroArchCfgs := range distroCfgs {
+			archGlob := glob.MustCompile(archName)
+			if !archGlob.Match(arch) {
+				continue
+			}
+			for itName, distroArchItCfgs := range distroArchCfgs {
+				itGlob := glob.MustCompile(itName)
+				if itGlob.Match(imageType) {
+					configs = append(configs, distroArchItCfgs...)
+				}
+			}
+		}
+	}
+	return configs
+}
+
 func loadConfigList(configPath string, opts *buildconfig.Options) *BuildConfigs {
 
 	type configFilters struct {
