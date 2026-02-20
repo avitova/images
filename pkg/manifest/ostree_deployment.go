@@ -177,6 +177,11 @@ func (p *OSTreeDeployment) serializeStart(inputs Inputs) error {
 		return errors.New("OSTreeDeployment: double call to serializeStart()")
 	}
 
+	totalinputs := len(inputs.Commits) + len(inputs.Containers)
+	if totalinputs != 1 {
+		return fmt.Errorf("OSTreeDeployment: pipeline %s requires exactly one ostree commit or one container (have commits: %v; containers: %v)", p.Name(), inputs.Commits, inputs.Containers)
+	}
+
 	switch {
 	case len(inputs.Commits) == 1:
 		p.ostreeSpec = &inputs.Commits[0]
